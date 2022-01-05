@@ -1,7 +1,8 @@
-package com.example.testableapproach
+package com.example.testableapproach.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.testableapproach.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
