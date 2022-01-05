@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.testableapproach.databinding.FragmentFirstBinding
+import com.example.testableapproach.presentation.firstfragment.adapter.FirstFragmentAdapter
 import com.example.testableapproach.presentation.firstfragment.viewmodel.FirstFragmentViewModel
 import com.example.testableapproach.presentation.firstfragment.viewmodel.FirstFragmentViewModelFactory
 
@@ -17,6 +18,9 @@ class FirstFragment : Fragment() {
             this,
             FirstFragmentViewModelFactory()
         )[FirstFragmentViewModel::class.java]
+    }
+    private val fragmentAdapter by lazy {
+        FirstFragmentAdapter()
     }
 
     private var _binding: FragmentFirstBinding? = null
@@ -33,13 +37,10 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.bntFf.setOnClickListener {
-            viewModel.load()
-        }
+        binding.ffRv.adapter = fragmentAdapter
 
         viewModel.modelCount.observe(viewLifecycleOwner){
-            binding.tvFf.text = it
+            fragmentAdapter.submitList(it)
         }
     }
 

@@ -1,6 +1,8 @@
 package com.example.testableapproach.data.storage
 
+import androidx.lifecycle.LiveData
+
 interface StorageRepository {
 
-    fun getStorageModel(): StorageModel
+    fun getStorageModel(): LiveData<List<StorageModel>>
 }

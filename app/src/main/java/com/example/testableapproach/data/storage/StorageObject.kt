@@ -1,10 +1,17 @@
 package com.example.testableapproach.data.storage
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+
 object StorageObject: StorageRepository {
 
-    private val storageModel = StorageModel(10)
+    private val storageModel = MutableLiveData<List<StorageModel>>()
 
-    override fun getStorageModel(): StorageModel {
+    init {
+        storageModel.value = arrayListOf(StorageModel(10), StorageModel(5))
+    }
+
+    override fun getStorageModel(): LiveData<List<StorageModel>> {
         return storageModel
     }
 }
