@@ -52,7 +52,7 @@ class FirstFragment : Fragment() {
 
     private fun launchSecondFragment() {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, SecondFragment.newInstance())
+            .replace(R.id.main_container, SecondFragment.newInstance(5))
             .addToBackStack(SecondFragment.NAME_FRAGMENT)
             .commit()
     }
