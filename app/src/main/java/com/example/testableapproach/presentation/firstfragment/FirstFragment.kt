@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.testableapproach.R
 import com.example.testableapproach.databinding.FragmentFirstBinding
 import com.example.testableapproach.presentation.firstfragment.adapter.FirstFragmentAdapter
 import com.example.testableapproach.presentation.firstfragment.viewmodel.FirstFragmentViewModel
 import com.example.testableapproach.presentation.firstfragment.viewmodel.FirstFragmentViewModelFactory
+import com.example.testableapproach.presentation.secondfragment.SecondFragment
 
 class FirstFragment : Fragment() {
 
@@ -42,6 +44,17 @@ class FirstFragment : Fragment() {
         viewModel.modelCount.observe(viewLifecycleOwner){
             fragmentAdapter.submitList(it)
         }
+
+        binding.ffFab.setOnClickListener{
+            launchSecondFragment()
+        }
+    }
+
+    private fun launchSecondFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, SecondFragment.newInstance())
+            .addToBackStack(SecondFragment.NAME_FRAGMENT)
+            .commit()
     }
 
     override fun onDestroyView() {
