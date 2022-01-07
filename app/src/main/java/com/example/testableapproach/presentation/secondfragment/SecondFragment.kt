@@ -31,7 +31,9 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.sfTv.text = count.toString()
+        if (count != 0) {
+            binding.sfTv.text = count.toString()
+        }
     }
 
     override fun onDestroyView() {

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.testableapproach.R
 import com.example.testableapproach.databinding.FragmentFirstBinding
+import com.example.testableapproach.domain.DomainModel
 import com.example.testableapproach.presentation.firstfragment.adapter.FirstFragmentAdapter
 import com.example.testableapproach.presentation.firstfragment.viewmodel.FirstFragmentViewModel
 import com.example.testableapproach.presentation.firstfragment.viewmodel.FirstFragmentViewModelFactory
@@ -44,15 +45,17 @@ class FirstFragment : Fragment() {
         viewModel.modelCount.observe(viewLifecycleOwner){
             fragmentAdapter.submitList(it)
         }
-
         binding.ffFab.setOnClickListener{
             launchSecondFragment()
         }
+        fragmentAdapter.itemClickListener = {
+            launchSecondFragment(it.count)
+        }
     }
 
-    private fun launchSecondFragment() {
+    private fun launchSecondFragment(count: Int = 0) {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, SecondFragment.newInstance(5))
+            .replace(R.id.main_container, SecondFragment.newInstance(count))
             .addToBackStack(SecondFragment.NAME_FRAGMENT)
             .commit()
     }

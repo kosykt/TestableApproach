@@ -9,9 +9,12 @@ import com.example.testableapproach.domain.DomainModel
 class FirstFragmentAdapter() :
     ListAdapter<DomainModel, FirstFragmentItemViewHolder>(FirstFragmentDiffCallback()) {
 
+    var itemClickListener: ((DomainModel) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FirstFragmentItemViewHolder {
         return FirstFragmentItemViewHolder(
-            FfItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            FfItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            itemClickListener = itemClickListener
         )
     }
 
