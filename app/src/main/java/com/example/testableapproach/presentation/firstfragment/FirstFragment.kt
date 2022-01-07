@@ -1,5 +1,6 @@
 package com.example.testableapproach.presentation.firstfragment
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.testableapproach.R
 import com.example.testableapproach.databinding.FragmentFirstBinding
 import com.example.testableapproach.domain.DomainModel
+import com.example.testableapproach.presentation.App
 import com.example.testableapproach.presentation.firstfragment.adapter.FirstFragmentAdapter
 import com.example.testableapproach.presentation.firstfragment.viewmodel.FirstFragmentViewModel
 import com.example.testableapproach.presentation.firstfragment.viewmodel.FirstFragmentViewModelFactory
@@ -19,7 +21,7 @@ class FirstFragment : Fragment() {
     private val viewModel: FirstFragmentViewModel by lazy {
         ViewModelProvider(
             this,
-            FirstFragmentViewModelFactory()
+            FirstFragmentViewModelFactory(App.instance)
         )[FirstFragmentViewModel::class.java]
     }
     private val fragmentAdapter by lazy {
