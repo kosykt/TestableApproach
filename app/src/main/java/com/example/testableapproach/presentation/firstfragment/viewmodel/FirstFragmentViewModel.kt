@@ -1,12 +1,13 @@
 package com.example.testableapproach.presentation.firstfragment.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.testableapproach.data.retrofit.ApiHolder
 import com.example.testableapproach.data.retrofit.model.RetrofitModel
 import com.example.testableapproach.domain.GetUseCase
-import retrofit2.Call
-import retrofit2.Callback
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class FirstFragmentViewModel(
@@ -18,27 +19,12 @@ class FirstFragmentViewModel(
     private val _modelCount = getUseCase.execute()
     val modelCount = _modelCount
 
-    fun testRetrofit() {
-        retrofit.apiService.getCashPayment().enqueue(object :
-            Callback<RetrofitModel> {
-            override fun onResponse(call: Call<RetrofitModel>, response: Response<RetrofitModel>) {
-                if (response.isSuccessful && response.body() != null) {
-                    val asd = response.body()
-                    Log.d("testRetrofit", asd.toString())
-                } else {
-                    val message = response.message()
-                    if (message.isNullOrEmpty()) {
-                        Log.d("testRetrofit", message)
-                    } else {
-                        Log.d("testRetrofit", message)
-                    }
-                }
-            }
+    val test: MutableLiveData<Response<RetrofitModel>> = MutableLiveData()
 
-            override fun onFailure(call: Call<RetrofitModel>, t: Throwable) {
-                Log.d("testRetrofit", t.message.toString())
-            }
+    fun testRetrofit() {
+        viewModelScope.launch {
+            test.value = ApiHolder.apiService.getCashPayment()
+            Log.d("testRetrofit", test.value.toString())
         }
-        )
     }
 }

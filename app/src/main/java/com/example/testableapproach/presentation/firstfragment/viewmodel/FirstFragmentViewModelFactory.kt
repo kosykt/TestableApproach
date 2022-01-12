@@ -16,7 +16,7 @@ class FirstFragmentViewModelFactory(application: Application) : ViewModelProvide
     )
     private val getUseCase = GetUseCase(repository = domainRepository)
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return FirstFragmentViewModel(getUseCase) as T
     }
 }
