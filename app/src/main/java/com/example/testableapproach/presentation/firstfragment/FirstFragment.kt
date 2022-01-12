@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.testableapproach.R
+import com.example.testableapproach.data.retrofit.model.RetrofitModel
 import com.example.testableapproach.databinding.FragmentFirstBinding
 import com.example.testableapproach.domain.DomainModel
 import com.example.testableapproach.presentation.App
@@ -54,6 +56,10 @@ class FirstFragment : Fragment() {
             launchSecondFragment(it.count)
         }
         viewModel.testRetrofit()
+        viewModel.test.observe(viewLifecycleOwner){ response ->
+            val v = response.body()?.get(0)?.buy
+            Toast.makeText(context, v, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun launchSecondFragment(count: Int = 0) {
