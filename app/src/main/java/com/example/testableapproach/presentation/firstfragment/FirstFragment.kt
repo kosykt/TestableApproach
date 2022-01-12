@@ -53,6 +53,7 @@ class FirstFragment : Fragment() {
         fragmentAdapter.itemClickListener = {
             launchSecondFragment(it.count)
         }
+        viewModel.testRetrofit()
     }
 
     private fun launchSecondFragment(count: Int = 0) {
