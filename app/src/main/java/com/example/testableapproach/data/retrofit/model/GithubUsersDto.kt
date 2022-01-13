@@ -1,3 +1,3 @@
 package com.example.testableapproach.data.retrofit.model
 
-class RetrofitModel : ArrayList<RetrofitModelItem>()
+class GithubUsersDto : ArrayList<GithubUsersDtoItem>()

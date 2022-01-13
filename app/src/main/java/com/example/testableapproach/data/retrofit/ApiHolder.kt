@@ -7,12 +7,12 @@ object ApiHolder {
 
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://api.privatbank.ua/")
+            .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    val apiService: RetrofitService by lazy {
+    val retrofitService: RetrofitService by lazy {
         retrofit.create(RetrofitService::class.java)
     }
 }

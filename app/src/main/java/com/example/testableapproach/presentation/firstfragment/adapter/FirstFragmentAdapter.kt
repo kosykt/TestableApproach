@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.testableapproach.databinding.FfItemBinding
-import com.example.testableapproach.domain.DomainModel
+import com.example.testableapproach.domain.model.DomainUsersModel
 
 class FirstFragmentAdapter() :
-    ListAdapter<DomainModel, FirstFragmentItemViewHolder>(FirstFragmentDiffCallback()) {
+    ListAdapter<DomainUsersModel, FirstFragmentItemViewHolder>(FirstFragmentDiffCallback()) {
 
-    var itemClickListener: ((DomainModel) -> Unit)? = null
+    var itemClickListener: ((DomainUsersModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FirstFragmentItemViewHolder {
         return FirstFragmentItemViewHolder(

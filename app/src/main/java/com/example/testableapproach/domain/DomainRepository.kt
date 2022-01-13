@@ -1,8 +1,8 @@
 package com.example.testableapproach.domain
 
-import androidx.lifecycle.LiveData
+import com.example.testableapproach.domain.model.DomainUsersModel
 
 interface DomainRepository {
 
-    fun get(): LiveData<List<DomainModel>>
+    fun get(): List<DomainUsersModel>
 }

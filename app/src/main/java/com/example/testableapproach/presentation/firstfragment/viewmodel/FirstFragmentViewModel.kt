@@ -5,26 +5,27 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testableapproach.data.retrofit.ApiHolder
-import com.example.testableapproach.data.retrofit.model.RetrofitModel
 import com.example.testableapproach.domain.GetUseCase
+import com.example.testableapproach.domain.model.DomainUsersModel
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class FirstFragmentViewModel(
     private val getUseCase: GetUseCase
 ) : ViewModel() {
 
-    private val retrofit = ApiHolder
+    private val _usersList = MutableLiveData<List<DomainUsersModel>>()
+    val usersList: MutableLiveData<List<DomainUsersModel>>
+        get() = _usersList
 
-    private val _modelCount = getUseCase.execute()
-    val modelCount = _modelCount
-
-    val test: MutableLiveData<Response<RetrofitModel>> = MutableLiveData()
+    fun getUsersFromNetwork(){
+        _usersList.value = getUseCase.execute()
+        testRetrofit()
+    }
 
     fun testRetrofit() {
         viewModelScope.launch {
-            test.value = ApiHolder.apiService.getCashPayment()
-            Log.d("testRetrofit", test.value.toString())
+            val a = ApiHolder.retrofitService.getTest()
+            Log.d("testRetrofit", a.isSuccessful.toString())
         }
     }
 }

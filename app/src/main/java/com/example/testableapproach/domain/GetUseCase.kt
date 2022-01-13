@@ -1,10 +1,10 @@
 package com.example.testableapproach.domain
 
-import androidx.lifecycle.LiveData
+import com.example.testableapproach.domain.model.DomainUsersModel
 
 class GetUseCase(private val repository: DomainRepository) {
 
-    fun execute(): LiveData<List<DomainModel>> {
+    fun execute(): List<DomainUsersModel> {
         return repository.get()
     }
 }

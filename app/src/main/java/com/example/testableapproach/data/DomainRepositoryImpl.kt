@@ -1,33 +1,36 @@
 package com.example.testableapproach.data
 
-import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import com.example.testableapproach.data.roomdatabase.AppDatabase
-import com.example.testableapproach.data.roomdatabase.RoomModel
-import com.example.testableapproach.data.storage.StorageModel
-import com.example.testableapproach.data.storage.StorageRepository
-import com.example.testableapproach.domain.DomainModel
+import com.example.testableapproach.data.repositories.NetworkRepository
 import com.example.testableapproach.domain.DomainRepository
+import com.example.testableapproach.domain.model.DomainUsersModel
 
 class DomainRepositoryImpl(
-    private val repository: StorageRepository,
-    application: Application
+    private val networkRepository: NetworkRepository
 ) : DomainRepository {
 
-    private val roomDao = AppDatabase.getInstance(application).roomDao()
-
-    init {
-        roomDao.insert(RoomModel(111, 111))
+    override fun get(): List<DomainUsersModel> {
+        return networkRepository.getUsersFromNetwork().map {
+            DomainUsersModel(
+                avatar_url = it.avatar_url,
+                events_url = it.events_url,
+                followers_url = it.followers_url,
+                following_url = it.following_url,
+                gists_url = it.gists_url,
+                gravatar_id = it.gravatar_id,
+                html_url = it.html_url,
+                id = it.id,
+                login = it.login,
+                node_id = it.node_id,
+                organizations_url = it.organizations_url,
+                received_events_url = it.received_events_url,
+                repos_url = it.repos_url,
+                site_admin = it.site_admin,
+                starred_url = it.starred_url,
+                subscriptions_url = it.subscriptions_url,
+                type = it.type,
+                url = it.url,
+            )
+        }
     }
 
-    override fun get(): LiveData<List<DomainModel>> = Transformations.map(
-        repository.getStorageModel()
-    ) {
-        mapToDomainModel(it)
-    }
-
-    private fun mapToDomainModel(list: List<StorageModel>) = list.map {
-        DomainModel(count = it.count)
-    }
 }
