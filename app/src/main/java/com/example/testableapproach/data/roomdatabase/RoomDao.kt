@@ -13,4 +13,7 @@ interface RoomDao {
 
     @Query("SELECT * FROM RoomModel")
     suspend fun getAll(): List<RoomModel>
+
+    @Query("SELECT * FROM RoomModel WHERE id = :id LIMIT 1")
+    suspend fun getById(id: String): RoomModel?
 }

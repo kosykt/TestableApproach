@@ -5,4 +5,6 @@ import com.example.testableapproach.data.roomdatabase.RoomModel
 interface DatabaseRepository {
 
     suspend fun save(data: List<RoomModel>)
+
+    suspend fun getById(id: String): RoomModel?
 }

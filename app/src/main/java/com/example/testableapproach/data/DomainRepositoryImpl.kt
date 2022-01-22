@@ -17,6 +17,12 @@ class DomainRepositoryImpl(
         databaseRepository.save(data.toRoomModel())
         return data.toDomainModel()
     }
+
+    override suspend fun getById(id: String): RoomModel? {
+        return databaseRepository.getById(id)
+    }
+
+
 }
 
 fun List<GithubUsersDto>.toDomainModel() = this.map {
