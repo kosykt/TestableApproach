@@ -4,7 +4,7 @@ import com.example.testableapproach.domain.model.DomainUsersModel
 
 class GetUseCase(private val repository: DomainRepository) {
 
-    fun execute(): List<DomainUsersModel> {
-        return repository.get()
+    suspend fun execute(): List<DomainUsersModel> {
+        return repository.getFromNetwork()
     }
 }

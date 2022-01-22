@@ -46,6 +46,10 @@ class FirstFragment : Fragment() {
         viewModel.usersList.observe(viewLifecycleOwner){
             fragmentAdapter.submitList(it)
         }
+
+        fragmentAdapter.itemClickListener = {
+            launchSecondFragment(it.id)
+        }
     }
 
     private fun launchSecondFragment(count: Int = 0) {

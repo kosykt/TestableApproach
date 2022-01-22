@@ -9,8 +9,8 @@ import androidx.room.Query
 interface RoomDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(model: RoomModel)
+    suspend fun insert(model: List<RoomModel>)
 
     @Query("SELECT * FROM RoomModel")
-    fun getAll(): List<RoomModel>
+    suspend fun getAll(): List<RoomModel>
 }

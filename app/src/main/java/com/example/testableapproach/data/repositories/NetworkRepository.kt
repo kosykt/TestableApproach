@@ -4,5 +4,5 @@ import com.example.testableapproach.data.retrofit.model.GithubUsersDto
 
 interface NetworkRepository {
 
-    fun getUsersFromNetwork(): GithubUsersDto
+    suspend fun getUsersFromNetwork(): List<GithubUsersDto>
 }

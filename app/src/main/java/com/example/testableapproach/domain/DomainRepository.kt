@@ -4,5 +4,5 @@ import com.example.testableapproach.domain.model.DomainUsersModel
 
 interface DomainRepository {
 
-    fun get(): List<DomainUsersModel>
+    suspend fun getFromNetwork(): List<DomainUsersModel>
 }
